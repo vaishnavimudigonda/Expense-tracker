@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MONEY MAP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        /* HEADER CONTAINER */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            color: white;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            background: red;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            background-color: darkred;
+        }
+    
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Full-screen background video */
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: cover;
+        }
+
+        /* Foreground Content */
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+            font-size: 2rem;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .info-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1rem;
+            color: black;
+            width: 60%;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+        .info-container:hover {
+            background: rgb(27, 88, 142);
+        }
+
+        .steps-container {
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1rem;
+            color: black;
+            width: 60%;
+            text-align: left;
+        }
+
+        .steps-container h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="logo-container">
+            <img src="image.png" alt="MONEY MAP Logo" class="logo">
+            <h1>MONEY MAP</h1>
+        </div>
+        <nav>
+            <a href="loginpage.html" target="_blank">Login</a>
+        </nav>
+    </div>
+    
+    <!-- Video Background -->
+    <div class="video-container">
+        <video autoplay muted loop>
+            <source src="template video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    
+    <!-- Info Section -->
+    <div class="info-container">
+        <p><strong>MONEY MAP</strong> is an expense tracker designed to provide users with a clear and structured financial overview. By categorizing transactions, analyzing spending patterns, and optimizing budgeting strategies, it empowers individuals and businesses to make informed financial decisions. This tool enhances financial discipline, promotes savings, and ensures a more secure and well-managed financial future.</p>
+    </div>
+
+    <!-- Steps Section -->
+    <div class="steps-container">
+        <h2>How to Create a Money Map</h2>
+        <ol>
+            <li><strong>Define Your Financial Goals:</strong> Identify your savings, spending, and investment objectives.</li>
+            <li><strong>Record Income and Expenses:</strong> Categorize all earnings and spending regularly.</li>
+            <li><strong>Analyze Spending Patterns:</strong> Identify unnecessary expenses and optimize financial habits.</li>
+            <li><strong>Set a Budget and Adjust Accordingly:</strong> Allocate funds wisely and revise as needed.</li>
+            <li><strong>Maintain and Review Regularly:</strong> Update and review your money map consistently for accuracy.</li>
+        </ol>
+    </div>
+
+</body>
+</html>

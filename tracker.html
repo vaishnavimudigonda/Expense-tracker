@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MONEY MAP</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .container {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        max-width: 400px;
+    }
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+    .balance-input, .transaction-form {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+    input, button {
+        margin: 5px 0;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    .expense {
+        color: red;
+    }
+    .income {
+        color: green;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    li {
+        display: flex;
+        justify-content: space-between;
+        background: #f9f9f9;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+    }
+    .delete-btn {
+        background: red;
+        color: white;
+        border: none;
+        padding: 5px;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+    body {
+            background-image:url(contact\ image.jpg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>MONEY MAP</h2>
+        
+        <div class="balance-input">
+            <input type="number" id="initial-balance" placeholder="Enter your balance" required>
+            <button id="set-balance">Set Balance</button>
+        </div>
+
+        <h3>Available Balance: <span id="available-balance">₹0.00</span></h3>
+        <h3>Spent Amount: <span id="spent-amount">₹0.00</span></h3>
+        
+
+        <div class="transaction-form">
+            <input type="text" id="desc" placeholder="Enter Transaction description" required>
+            <input type="number" id="amount" placeholder="Enter amount spent" required>
+            <button id="add-transaction">Add Transaction</button>
+        </div>
+
+        <h3>Transactions</h3>
+        <ul id="transaction-list"></ul>
+    </div>
+    
+    <script>
+document.addEventListener("DOMContentLoaded", loadTransactions);
+const spentAmountDisplay = document.getElementById("spent-amount");
+const availableBalanceDisplay = document.getElementById("available-balance");
+const initialBalanceInput = document.getElementById("initial-balance");
+const setBalanceBtn = document.getElementById("set-balance");
+const descInput = document.getElementById("desc");
+const amountInput = document.getElementById("amount");
+const addTransactionBtn = document.getElementById("add-transaction");
+const transactionList = document.getElementById("transaction-list");
+
+let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+let initialBalance = parseFloat(localStorage.getItem("initialBalance")) || 0;
+let totalSpent = 0;
+
+function updateBalance() {
+    totalSpent = transactions.reduce((acc, item) => acc + (item.amount > 0 ? item.amount : 0), 0);
+    const availableBalance = initialBalance - totalSpent;
+    
+    spentAmountDisplay.innerText = `₹${totalSpent.toFixed(2)}`;
+    availableBalanceDisplay.innerText = `₹${availableBalance.toFixed(2)}`;
+}
+
+function addTransaction() {
+    const desc = descInput.value.trim();
+    const amount = parseFloat(amountInput.value);
+
+    if (desc === "" || isNaN(amount)) {
+        alert("Please enter valid values!");
+        return;
+    }
+
+    const transaction = { id: Date.now(), desc, amount };
+    transactions.push(transaction);
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+
+    addTransactionToDOM(transaction);
+    updateBalance();
+    
+    descInput.value = "";
+    amountInput.value = "";
+}
+
+function addTransactionToDOM(transaction) {
+    const li = document.createElement("li");
+    li.classList.add(transaction.amount >= 0 ? "income" : "expense");
+    li.innerHTML = `${transaction.desc} <span>₹${transaction.amount.toFixed(2)}</span>
+    <button class="delete-btn" onclick="removeTransaction(${transaction.id})">X</button>`;
+    transactionList.appendChild(li);
+}
+
+function removeTransaction(id) {
+    transactions = transactions.filter(item => item.id !== id);
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+    loadTransactions();
+}
+
+function loadTransactions() {
+    transactionList.innerHTML = "";
+    transactions.forEach(addTransactionToDOM);
+    updateBalance();
+}
+
+function setInitialBalance() {
+    const enteredBalance = parseFloat(initialBalanceInput.value);
+    if (isNaN(enteredBalance) || enteredBalance < 0) {
+        alert("Please enter a valid initial balance");
+        return;
+    }
+    initialBalance = enteredBalance;
+    localStorage.setItem("initialBalance", initialBalance);
+    updateBalance();
+}
+
+setBalanceBtn.addEventListener("click", setInitialBalance);
+addTransactionBtn.addEventListener("click", addTransaction);
+   </script>
+</body>
+</html>

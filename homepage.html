@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - MONEY MAP</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f5f5f5;
+                margin: 0;
+                padding: 0;
+                text-align: center;
+            }
+            header {
+                color: white;
+                padding: 10px; /* Reduced padding */
+                font-size: 35px; /* Slightly smaller font size */
+            }
+            .navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 13px;
+                 color: white;
+            }
+            .logout-btn {
+                background: red;
+                color: white;
+                border: none;
+                padding: 10px 15px;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+            .logout-btn:hover {
+                background: darkred;
+            }
+            .hero {
+                 color: white;
+                padding: 50px;
+                box-shadow: #f5f5f5 0px 0px 10px;
+            }
+            .hero h1 {
+                margin-bottom: 10px;
+            }
+            .btn {
+                background: #007bff;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                cursor: pointer;
+                border-radius: 5px;
+                font-size: 16px;
+            }
+            .btn:hover {
+                background: #0056b3;
+            }
+            .features {
+                padding: 50px;
+                color: white;
+            }
+            .feature-box {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .feature {
+                width: 250px;
+                margin: 15px;
+                padding: 20px;
+                border-radius: 8px;
+            }
+            body {
+    background-image: url(login\ template.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+        </style>
+    </style>
+</head>
+<body onload="checkLogin()">
+    <header>MONEY MAP</header>
+    <div class="navbar">
+        <div style="flex-grow: 1; text-align: right;">
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <section class="hero">
+        <h1 >Take Control of Your Expenses</h1>
+        <p>Take control of your finances with an expense tracker! Easily monitor spending, set budgets, and save more.
+            <br> Gain financial clarity, reduce stress, and achieve your goals—start tracking today! </p>
+        <button class="btn" onclick="location.href='tracker.html'">Get Started</button>
+    </section>
+
+    <section class="features">
+        <h2>Why Use Our MONEY MAP?</h2>
+        <div class="feature-box">
+            <div class="feature">
+                <h3>Simple & Fast</h3>
+                <p>Effortlessly add transactions and keep track of your balance in seconds.</p>
+            </div>
+            <div class="feature">
+                <h3>Budget Management</h3>
+                <p>Set spending limits and track where your money is going.</p>
+            </div>
+            <div class="feature">
+                <h3>Secure & Private</h3>
+                <p>Your data is stored securely with privacy protection.</p>
+            </div>
+            <div class="feature">
+                <h3>User-Friendly Interface</h3>
+                <p>Designed for ease of use with a clean and intuitive interface.</p>
+            </div>
+            <div class="feature">
+                <h3>Real-Time Updates</h3>
+                <p>Get instant updates on your expenses and income to stay on top of your finances.</p>
+            </div>
+        </div>
+    </section>
+    <style>
+        .feature:hover {
+            background: #007bff;
+            color: white;
+            transform: scale(1.05);
+            transition: all 0.3s ease-in-out;
+        }
+        .feature h3, .feature p {
+            transition: color 0.3s ease-in-out;
+        }
+        .feature:hover h3, .feature:hover p {
+            color: white;
+        }
+    </style>
+
+    <script>
+        function checkLogin() {
+            if (localStorage.getItem("isLoggedIn") !== "true") {
+                window.location.href = "loginpage.html";
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem("isLoggedIn");
+            window.location.href = "loginpage.html";
+        }
+    </script>
+</body>
+</html>
